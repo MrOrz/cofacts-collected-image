@@ -1,3 +1,9 @@
+/**
+ * Writes hash4.json, hash8.json & hash16.json, which contains a single map with
+ * - perceptual hash being key
+ * - filenames with that hash being values
+ */
+
 import fs from 'fs';
 import path from 'path';
 import { imageHash } from 'image-hash';
@@ -5,6 +11,11 @@ import { SingleBar } from 'cli-progress';
 
 const DATA_IMAGE_DIR = './data/images';
 const DATA_OUT = './data';
+
+/**
+ * Maps hash to list of file names
+ */
+export type HashMap = {[hash: string]: string[]};
 
 function getHash(fileName: string, bits: number): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -16,12 +27,12 @@ function getHash(fileName: string, bits: number): Promise<string> {
   });
 }
 
-async function genHashMap(bits: number): Promise<{[hash: string]: string[]}> {
+async function genHashMap(bits: number): Promise<HashMap> {
   /**
    * Map hash to files
    */
   console.log(`Processing for bits=${bits}`)
-  const hashMap: {[hash: string]: string[]} = {};
+  const hashMap: HashMap = {};
   const files = fs.readdirSync(path.join(DATA_IMAGE_DIR), {
     withFileTypes: true
   }).filter(dirent => dirent.isFile());

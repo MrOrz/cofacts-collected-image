@@ -22,7 +22,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "gen:hash": "esrun src/scripts/genHash"
+    "gen:hash": "esrun src/scripts/genHash",
+    "gen:dist": "esrun src/scripts/genDistMap"
   },
   "eslintConfig": {
     "extends": [
