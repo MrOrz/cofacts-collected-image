@@ -83,7 +83,13 @@ function main() {
     console.log(`Processing for bits=${bits}`)
     const hashMap = JSON.parse(fs.readFileSync(`./data/hash${bits}.json`, { encoding: 'utf8' }));
     const nearbyHashes = getNearbyHashes(hashMap, Math.round(bits * bits * NEARBY_TOLERANCE));
-    fs.writeFileSync(path.join(DATA_OUT, `dist${bits}.json`), JSON.stringify(nearbyHashes, null, '  '));
+
+    // Avoid OOM
+    const entries = Object.entries(nearbyHashes).map(([key, value]) => `"${key}": ${JSON.stringify(value)}`);
+    fs.writeFileSync(
+      path.join(DATA_OUT, `dist${bits}.json`),
+      `{\n${entries.join(',\n')}\n}`
+    );
   }
 }
 

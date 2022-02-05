@@ -24,3 +24,5 @@ yarn-error.log*
 
 # Data files
 /data/*
+/src/data
+/public/images
