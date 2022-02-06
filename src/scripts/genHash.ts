@@ -9,6 +9,7 @@ import path from 'path';
 import { imageHash } from 'image-hash';
 import { SingleBar } from 'cli-progress';
 
+import { BITS } from '../util';
 const DATA_IMAGE_DIR = './data/images';
 const DATA_OUT = './data';
 
@@ -58,15 +59,6 @@ async function genHashMap(bits: number): Promise<HashMap> {
 
   return hashMap;
 }
-
-const BITS = [
-  /** 16 bit hex; length = 4 */
-  4,
-  /** 64 bit hex; length = 16 */
-  8,
-  /** 256 bit hex; length = 64 */
-  16
-] as const;
 
 async function main() {
   for(const bits of BITS) {

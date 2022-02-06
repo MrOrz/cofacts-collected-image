@@ -1,6 +1,8 @@
 import path from 'path';
 import fs from 'fs';
 import { SingleBar } from 'cli-progress';
+
+import { BITS } from '../util';
 import type { HashMap } from './genHash';
 
 // % of bit differences that can be toleranted (to consider as near-by).
@@ -68,15 +70,6 @@ function getNearbyHashes(hashMap: HashMap, threshold: number = Infinity): HashDi
   bar.stop();
   return hashDistMap;
 }
-
-const BITS = [
-  /** 16 bit hex; length = 4 */
-  4,
-  /** 64 bit hex; length = 16 */
-  8,
-  /** 256 bit hex; length = 64 */
-  16
-] as const;
 
 function main() {
   for(const bits of BITS) {
