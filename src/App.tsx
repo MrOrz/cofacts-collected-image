@@ -1,12 +1,14 @@
-import React from 'react';
-import './App.css';
-import HashList from './HashList';
-// import dist4 from './data/dist4.json';
-import hash4 from './data/hash4.json';
+import { Stack } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { BITS } from './util';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <HashList hashMap={hash4} />
+    <Stack>
+      {
+        BITS.map(bit => <Link key={bit} to={`/${bit}/hashes`}>Hash length = {bit}</Link>)
+      }
+    </Stack>
   );
 }
 

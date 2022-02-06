@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 import type { HashMap } from './scripts/genHash';
 
 type Props = {
@@ -6,6 +7,7 @@ type Props = {
 };
 
 const HashList: React.FC<Props> = ({hashMap}) => {
+  const { } = useParams();
   const hashEntries = useMemo(() => {
     return Object.entries(hashMap).sort(([, fns1], [, fns2]) => fns2.length - fns1.length)
   }, [hashMap]);
