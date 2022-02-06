@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 
 import type { HashMap } from './scripts/genHash';
@@ -40,7 +41,9 @@ const HashList: React.FC<Props> = ({hashMap}) => {
           .slice((page-1) * PAGE_SIZE, page * PAGE_SIZE)
           .map(([hash, fileNames]) => (
             <li key={hash}>
-              <code>{hash}</code> ({fileNames.length})
+              <Link to={hash}>
+                <code>{hash}</code> ({fileNames.length})
+              </Link>
               <ul>
                 {
                   fileNames.slice(0, 3).map(fn => (

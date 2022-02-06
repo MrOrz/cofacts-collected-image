@@ -6,24 +6,31 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
 import App from './App';
 import HashListPageSkeleton from './HashListPageSkeleton';
+import HashDetailSkeleton from './HashDetailSkeleton';
 import reportWebVitals from './reportWebVitals';
 
 const HashList4Page = React.lazy(() => import('./HashList4Page'));
 const HashList8Page = React.lazy(() => import('./HashList8Page'));
 const HashList16Page = React.lazy(() => import('./HashList16Page'));
+const HashDetail4Page = React.lazy(() => import('./HashDetail4Page'));
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/4/hashes" element={<React.Suspense fallback={<HashListPageSkeleton />}>
-          <HashList4Page />
-        </React.Suspense>} />
-        <Route path="/8/hashes" element={<React.Suspense fallback={<HashListPageSkeleton />}>
+        <Route path="/4">
+          <Route path="" element={<React.Suspense fallback={<HashListPageSkeleton />}>
+            <HashList4Page />
+          </React.Suspense>} />
+          <Route path=":hash" element={<React.Suspense fallback={<HashDetailSkeleton />}>
+            <HashDetail4Page />
+          </React.Suspense>} />
+        </Route>
+        <Route path="/8" element={<React.Suspense fallback={<HashListPageSkeleton />}>
           <HashList8Page />
         </React.Suspense>} />
-        <Route path="/16/hashes" element={<React.Suspense fallback={<HashListPageSkeleton />}>
+        <Route path="/16" element={<React.Suspense fallback={<HashListPageSkeleton />}>
           <HashList16Page />
         </React.Suspense>} />
       </Routes>
