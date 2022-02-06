@@ -6,7 +6,7 @@ const App: React.FC = () => {
   return (
     <Stack>
       {
-        BITS.map(bit => <Link key={bit} to={`/${bit}/hashes`}>Hash length = {bit}</Link>)
+        BITS.map(bit => <Link key={bit} to={`/${bit}`}>Hash length = {bit}</Link>)
       }
     </Stack>
   );
