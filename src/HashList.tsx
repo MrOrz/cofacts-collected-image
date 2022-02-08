@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 import Pagination from '@mui/material/Pagination';
 
 import type { HashMap } from './scripts/genHash';
@@ -30,11 +32,16 @@ const HashList: React.FC<Props> = ({hashMap}) => {
     />
   );
 
-  return <>
-    <p>
-      {Formatter.format(hashEntries.length)} hashes
-    </p>
-    {paginationElem}
+  return <Container>
+    <Box sx={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      my: 1
+    }}>
+      <span>{Formatter.format(hashEntries.length)} hashes</span>
+      {paginationElem}
+    </Box>
     <ul>
       {
         hashEntries
@@ -55,8 +62,14 @@ const HashList: React.FC<Props> = ({hashMap}) => {
           ))
       }
     </ul>
-    {paginationElem}
-  </>
+    <Box sx={{
+      display: 'flex',
+      justifyContent: 'flex-end',
+      my: 1,
+    }}>
+      {paginationElem}
+    </Box>
+  </Container>
 }
 
 export default HashList;
