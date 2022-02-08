@@ -8,6 +8,12 @@ import type { HashMap } from './genHash';
 // % of bit differences that can be toleranted (to consider as near-by).
 // Between 0 ~ 1.
 const NEARBY_TOLERANCE = 0.25;
+
+// Keep nearby hash to around this size.
+// (May be more hash than this number if there are many hash with the same distances)
+//
+const NEARBY_HASH_COUNT = 16;
+
 const DATA_OUT = './data';
 
 const XOR_DIST = [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4] as const;
@@ -65,6 +71,27 @@ function getNearbyHashes(hashMap: HashMap, threshold: number = Infinity): HashDi
       hashDistMap[hash][dist] ??= [];
       hashDistMap[hash][dist].push(currentHash);
     }
+
+    if(hashDistMap[currentHash]) {
+      // Only keep entries with smaller distances.
+      //
+      const allDists = hashDistMap[currentHash];
+      const distances = Object.keys(allDists).map(d => +d);
+      distances.sort();
+
+      // Re-populate hashDistMap[currentHash] starting with lower distances
+      //
+      hashDistMap[currentHash] = distances.reduce<{
+        hashCount: number; map: HashDistMap[string]
+      }>((agg, d) => {
+        if(agg.hashCount >= NEARBY_HASH_COUNT) return agg;
+
+        agg.map[d] = allDists[d];
+        agg.hashCount += allDists[d].length;
+        return agg;
+      }, {map: {}, hashCount: 0}).map;
+    }
+
     bar.increment();
   }
   bar.stop();
