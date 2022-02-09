@@ -44,8 +44,8 @@ const HashEntries: React.FC<Props> = ({entries}) => {
           const fileNamesToShow = fileNames.slice(0, 4);
           const layout = LAYOUT[fileNamesToShow.length];
           return (
-            <li key={hash}>
-              <Link to={url}>
+            <li key={hash} style={{width: 'min-content'}}>
+              <Link to={url} style={{wordBreak: 'break-all'}}>
                 <code>{hash}</code> ({fileNames.length})
               </Link>
               <ImageList variant="quilted" cols={3} rowHeight={100} sx={{width: 300}}>
