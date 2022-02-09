@@ -12,7 +12,7 @@ type Props = {
   }>;
 };
 
-const Entries = styled('ul')({
+export const Entries = styled('ul')({
   display: 'flex',
   flexFlow: 'row wrap',
   gap: '16px',

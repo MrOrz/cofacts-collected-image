@@ -1,7 +1,7 @@
 import { styled } from '@mui/system';
 import Container from '@mui/material/Container';
 import Skeleton from '@mui/material/Skeleton';
-import Stack from '@mui/material/Stack';
+import { Entries } from './HashEntries';
 
 export const FunctionBar = styled('div')({
   display: 'flex',
@@ -17,14 +17,13 @@ export default function HashPageSkeleton() {
         <Skeleton variant="text" sx={{width: '10em'}} />
         <Skeleton variant="text" sx={{width: '15em'}} />
       </FunctionBar>
-      <Stack spacing={1}>
-        <Skeleton variant="text" />
-        <Stack spacing={1}>
-          {Array.from(Array(3)).map((_, i) =>
-            <Skeleton key={i} variant="rectangular" width={210} height={118} />
-          )}
-        </Stack>
-      </Stack>
+      <Entries>
+        {Array.from(Array(3)).map((_, i) => <div>
+          <Skeleton variant="text" sx={{width: '8em'}} />
+          <Skeleton key={i} variant="rectangular" width={300} height={200} />
+        </div>
+        )}
+      </Entries>
     </Container>
   );
 }
