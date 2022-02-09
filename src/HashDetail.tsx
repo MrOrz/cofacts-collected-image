@@ -1,4 +1,8 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
+import { styled } from '@mui/system';
+import Container from '@mui/material/Container';
+import Pagination from '@mui/material/Pagination';
+
 import { useParams } from 'react-router-dom';
 import type { HashMap } from './scripts/genHash';
 import type { HashDistMap } from './scripts/genDistMap';
@@ -9,6 +13,8 @@ type Props = {
   distMap: HashDistMap;
 }
 
+const PAGE_SIZE = 500;
+
 type RouteParams = {
   hash: string;
 }
@@ -18,8 +24,20 @@ type HashEntriesWithDist = {
   hashEntries: React.ComponentProps<typeof HashEntries>['entries'];
 };
 
+const ImageWall = styled('ul')({
+  display: 'flex',
+  flexFlow: 'row wrap',
+  gap: '8px',
+  margin: 0,
+  padding: 0,
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  listStyle: 'none'
+});
+
 const HashDetail: React.FC<Props> = ({hashMap, distMap}) => {
   const { hash } = useParams<RouteParams>();
+  const [page, setPage] = useState(1);
 
   /**
    * NearbyHash entries, sorted first by distance than by number of files in the hash
@@ -46,19 +64,37 @@ const HashDetail: React.FC<Props> = ({hashMap, distMap}) => {
     return <p><code>hash</code> is not provided in URL.</p>
   }
 
-  return <>
-    <h1>{hash}</h1>
-    <ul>
+  const handlePageChange = (e: unknown, value: number) => {
+    setPage(value);
+  }
+
+  const fileNames = hashMap[hash];
+
+  const paginationElem = (
+    <Pagination
+      sx={{my: 1}}
+      count={Math.ceil(fileNames.length / PAGE_SIZE)}
+      page={page}
+      onChange={handlePageChange}
+    />
+  );
+
+  return <Container>
+    <h1>{hash} ({fileNames.length} images)</h1>
+
+    {paginationElem}
+    <ImageWall>
       {
-        hashMap[hash].map(fn => (
+        fileNames.slice((page-1) * PAGE_SIZE, page * PAGE_SIZE).map(fn => (
           <li key={fn}>
             <a href={`/images/${fn}`}>
-              <img height="100" src={`/images/${fn}`} alt={fn} />
+              <img height="160" src={`/images/${fn}`} alt={fn} />
             </a>
           </li>
         ))
       }
-    </ul>
+    </ImageWall>
+    {paginationElem}
 
     <h1>Nearby hashes</h1>
     {
@@ -69,7 +105,7 @@ const HashDetail: React.FC<Props> = ({hashMap, distMap}) => {
         </div>
       ))
     }
-  </>
+  </Container>
 };
 
 export default HashDetail;
