@@ -14,6 +14,7 @@ const HashList8Page = React.lazy(() => import('./HashList8Page'));
 const HashList16Page = React.lazy(() => import('./HashList16Page'));
 const HashDetail4Page = React.lazy(() => import('./HashDetail4Page'));
 const HashDetail8Page = React.lazy(() => import('./HashDetail8Page'));
+const HashDetail16Page = React.lazy(() => import('./HashDetail16Page'));
 
 ReactDOM.render(
   <React.StrictMode>
@@ -36,9 +37,14 @@ ReactDOM.render(
             <HashDetail8Page />
           </React.Suspense>} />
         </Route>
-        <Route path="/16" element={<React.Suspense fallback={<HashListPageSkeleton />}>
-          <HashList16Page />
-        </React.Suspense>} />
+        <Route path="/16">
+          <Route path="" element={<React.Suspense fallback={<HashListPageSkeleton />}>
+            <HashList16Page />
+          </React.Suspense>} />
+          <Route path=":hash" element={<React.Suspense fallback={<HashDetailSkeleton />}>
+            <HashDetail16Page />
+          </React.Suspense>} />
+        </Route>
       </Routes>
     </BrowserRouter>
     <CssBaseline />
