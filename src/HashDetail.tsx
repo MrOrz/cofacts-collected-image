@@ -79,7 +79,7 @@ const HashDetail: React.FC<Props> = ({hashMap, distMap}) => {
     />
   );
 
-  return <Container>
+  return <Container maxWidth={false}>
     <h1>{hash} ({fileNames.length} images)</h1>
 
     {paginationElem}

@@ -5,7 +5,7 @@ import { ImageWall } from './HashDetail';
 
 export default function HashDetailSkeleton() {
   return (
-    <Container>
+    <Container maxWidth={false}>
         <h1>
           <Skeleton variant="text" width="10em" />
         </h1>

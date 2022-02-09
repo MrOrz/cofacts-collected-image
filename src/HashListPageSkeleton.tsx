@@ -12,7 +12,7 @@ export const FunctionBar = styled('div')({
 
 export default function HashListPageSkeleton() {
   return (
-    <Container>
+    <Container maxWidth={false}>
       <FunctionBar>
         <Skeleton variant="text" sx={{width: '10em'}} />
         <Skeleton variant="text" sx={{width: '15em'}} />

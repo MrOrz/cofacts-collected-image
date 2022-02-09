@@ -36,7 +36,7 @@ const HashList: React.FC<Props> = ({hashMap}) => {
     />
   );
 
-  return <Container>
+  return <Container maxWidth={false}>
     <FunctionBar>
       <span>{Formatter.format(hashEntries.length)} hashes</span>
       {paginationElem}
