@@ -24,7 +24,7 @@ type HashEntriesWithDist = {
   hashEntries: React.ComponentProps<typeof HashEntries>['entries'];
 };
 
-const ImageWall = styled('ul')({
+export const ImageWall = styled('ul')({
   display: 'flex',
   flexFlow: 'row wrap',
   gap: '8px',

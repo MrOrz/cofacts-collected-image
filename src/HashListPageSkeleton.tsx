@@ -10,7 +10,7 @@ export const FunctionBar = styled('div')({
   padding: '8px 0',
 });
 
-export default function HashPageSkeleton() {
+export default function HashListPageSkeleton() {
   return (
     <Container>
       <FunctionBar>
