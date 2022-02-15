@@ -11,7 +11,7 @@ type Props = {
   hashMap: HashMap;
 };
 
-const PAGE_SIZE = 100;
+const PAGE_SIZE = 200;
 const Formatter = new Intl.NumberFormat();
 
 const HashList: React.FC<Props> = ({hashMap}) => {

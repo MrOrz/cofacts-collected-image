@@ -11,9 +11,11 @@ import reportWebVitals from './reportWebVitals';
 
 const HashList4Page = React.lazy(() => import('./HashList4Page'));
 const HashList8Page = React.lazy(() => import('./HashList8Page'));
+const HashList12Page = React.lazy(() => import('./HashList12Page'));
 const HashList16Page = React.lazy(() => import('./HashList16Page'));
 const HashDetail4Page = React.lazy(() => import('./HashDetail4Page'));
 const HashDetail8Page = React.lazy(() => import('./HashDetail8Page'));
+const HashDetail12Page = React.lazy(() => import('./HashDetail12Page'));
 const HashDetail16Page = React.lazy(() => import('./HashDetail16Page'));
 
 ReactDOM.render(
@@ -35,6 +37,14 @@ ReactDOM.render(
           </React.Suspense>} />
           <Route path=":hash" element={<React.Suspense fallback={<HashDetailSkeleton />}>
             <HashDetail8Page />
+          </React.Suspense>} />
+        </Route>
+        <Route path="/12">
+          <Route path="" element={<React.Suspense fallback={<HashListPageSkeleton />}>
+            <HashList12Page />
+          </React.Suspense>} />
+          <Route path=":hash" element={<React.Suspense fallback={<HashDetailSkeleton />}>
+            <HashDetail12Page />
           </React.Suspense>} />
         </Route>
         <Route path="/16">
