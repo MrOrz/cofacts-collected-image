@@ -10,10 +10,12 @@ import HashDetailSkeleton from './HashDetailSkeleton';
 import reportWebVitals from './reportWebVitals';
 
 const HashList4Page = React.lazy(() => import('./HashList4Page'));
+const HashList6Page = React.lazy(() => import('./HashList6Page'));
 const HashList8Page = React.lazy(() => import('./HashList8Page'));
 const HashList12Page = React.lazy(() => import('./HashList12Page'));
 const HashList16Page = React.lazy(() => import('./HashList16Page'));
 const HashDetail4Page = React.lazy(() => import('./HashDetail4Page'));
+const HashDetail6Page = React.lazy(() => import('./HashDetail6Page'));
 const HashDetail8Page = React.lazy(() => import('./HashDetail8Page'));
 const HashDetail12Page = React.lazy(() => import('./HashDetail12Page'));
 const HashDetail16Page = React.lazy(() => import('./HashDetail16Page'));
@@ -29,6 +31,14 @@ ReactDOM.render(
           </React.Suspense>} />
           <Route path=":hash" element={<React.Suspense fallback={<HashDetailSkeleton />}>
             <HashDetail4Page />
+          </React.Suspense>} />
+        </Route>
+        <Route path="/6">
+          <Route path="" element={<React.Suspense fallback={<HashListPageSkeleton />}>
+            <HashList6Page />
+          </React.Suspense>} />
+          <Route path=":hash" element={<React.Suspense fallback={<HashDetailSkeleton />}>
+            <HashDetail6Page />
           </React.Suspense>} />
         </Route>
         <Route path="/8">
