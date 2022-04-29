@@ -45,7 +45,7 @@ const HashDetail: React.FC<Props> = ({hashMap, distMap}) => {
   const nearbyHashEntries = useMemo<ReadonlyArray<HashEntriesWithDist>>(() => {
     if(!hash) return [];
 
-    return Object.entries(distMap[hash])
+    return Object.entries(distMap[hash] || {})
       .reduce<HashEntriesWithDist[]>((agg, [dist, hashes]) => [
           ...agg,
           {
